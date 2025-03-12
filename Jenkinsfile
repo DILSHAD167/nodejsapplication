@@ -7,17 +7,7 @@ pipeline {
         EC2_USERNAME = credentials('EC2_USERNAME')
         PRIVATE_KEY = credentials('PRIVATE_KEY')
     }
-     environment {
-        EC2_HOST = credentials('EC2_HOST')  // If stored in Jenkins credentials store
-    }
-    stages {
-        stage('Deploy to EC2') {
-            steps {
-                sh "scp -i /path/to/key.pem app.tar.gz ec2-user@${EC2_HOST}:/home/ec2-user/"
-                sh "ssh -i /path/to/key.pem ec2-user@${EC2_HOST} 'bash deploy.sh'"
-            }
-        }
-    }
+     
     stages {
         stage('Checkout') {
             steps {
