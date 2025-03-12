@@ -29,3 +29,16 @@ pipeline {
         }
     }
 }
+pipeline {
+    agent any
+    environment {
+        EC2_HOST = '3.85.214.123'  // Replace with your EC2 instance IP
+    }
+    stages {
+        stage('Deploy') {
+            steps {
+                sh "ssh ubuntu@${EC2_HOST} 'docker pull myapp && docker run -d -p 80:3000 myapp'"
+            }
+        }
+    }
+}
